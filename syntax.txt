@@ -1,0 +1,119 @@
+
+
+// comments look like this
+/*
+    and this
+*/
+
+import radon.algorithm.fnv1a;
+
+class UnorderedMap<K,V> {
+
+    struct Pair
+    {
+        K first;
+        V second;
+        Pair(K k, V v) { first = k; second = v; }
+
+        private int psl;            
+    };
+
+    Pair[] pairs;
+
+    public {
+    
+    
+    UnorderedMap(int size = 10){
+        pairs = new Pair[]{10}; // ??
+    }
+
+
+    void Insert(K first, V second){
+        // size = max size, length = num elements
+        int index = fnv1a.hash(first) % pairs.size();
+        
+        uint probelen = 0;
+        int swapIndex = -1;
+
+        while(probelen < pairs.size()) {
+        
+            if(pairs[index].psl == -1){
+                Pair p = new Pair(first, second);
+                // friendship???
+                p.psl = probelen;
+
+                pairs.append(p);
+
+
+            }
+        }
+
+
+    }
+    
+    }
+        
+
+}
+
+
+import ani.radium.Scene;
+import ani.radium.Scene.components;
+import radon.io;
+
+Scene current = Scene::getActiveScene();
+
+for(uint eid in current.GetEntities())
+    io::printfln("%d",eid);
+
+
+alias Entity = uint;
+
+Entity myEntity = current.newEntity();
+
+Panel2D myPanel = current.addComponent<Panel2D>(myEntity);
+
+myPanel.setWidth(10);
+myPanel.setHeight(100);
+
+myPanel.setTexture(current.loadImage("vfs://textures/bob.png").getData());
+
+// keywords: import for in uint int alias while do 
+
+
+// radon supports free functions but encourages classes
+
+int fib(int n) {
+    if (n == 0) return 0;
+    if (n < 3) return 1;
+    return fib(n-1) + fib(n - 2);
+}
+
+fib(10);
+
+store0 10
+call @fib // replaced with a virtual address at compile time
+...
+...
+@fib:
+    load 0
+    push 0
+    cmpe L0
+    ppush 3
+    cmple L1
+    load0
+    push
+    sub 1
+    istore0
+    call @fib
+    istore1
+    sub 1
+    istore0
+    call @fib
+    istore2
+
+
+L0: 
+    ret 0
+L1:
+    ret 1
